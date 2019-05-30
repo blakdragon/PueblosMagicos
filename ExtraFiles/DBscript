@@ -1,3 +1,7 @@
+create database pueblosmagicos;
+
+use pueblosmagicos;
+
 create table estado(
 idestado int not null primary key,
 nombre varchar(30));
@@ -7,7 +11,8 @@ nickname varchar(20) not null primary key,
 contrasena varchar(50),
 nombre varchar(20),
 apaterno varchar(20),
-amaterno varchar(20));
+amaterno varchar(20),
+correo varchar(30));
 
 create table administrador(
 curp varchar(20) not null primary key,
@@ -18,10 +23,11 @@ amaterno varchar(20));
 
 create table pueblomagico(
 idpm int not null primary key,
-nombre varchar(20),
+nombre varchar(20) unique,
 coordenadas varchar(30),
 idestado int,
 curp varchar(20),
+descripcion varchar(100)    ,
 foreign key(idestado) references estado(idestado) on delete cascade on update cascade,
 foreign key(curp) references administrador(curp) on delete cascade on update cascade);
 
@@ -29,6 +35,7 @@ create table lugar(
 idlugar int not null primary key,
 nombre varchar(20),
 idpm int,
+descripcion varchar(100),
 foreign key(idpm) references pueblomagico(idpm) on delete cascade on update cascade);
 
 create table fotoslugar(
@@ -39,7 +46,7 @@ foreign key(idlugar) references lugar(idlugar) on delete cascade on update casca
 
 create table resena(
 idresena int not null primary key,
-nickname varchar(20) unique,
+nickname varchar(20),
 idpm int,
 curp varchar(20),
 calificacion int,
@@ -47,4 +54,36 @@ comentario varchar(200),
 aprovada int,
 foreign key(nickname) references usuario(nickname) on delete cascade on update cascade,
 foreign key(idpm) references pueblomagico(idpm) on delete cascade on update cascade,
-foreign key(curp) references administrador(curp) on delete cascade on update cascade);
+foreign key(curp) references administrador(curp) on delete cascade on update cascade);  
+
+insert into estado values(1, 'Aguascalientes');
+insert into estado values(2, 'Baja California');
+insert into estado values(3, 'Baja California Sur');
+insert into estado values(4, 'Campeche');
+insert into estado values(5, 'Chiapas');
+insert into estado values(6, 'Chihuahua');
+insert into estado values(7, 'Coahuila');
+insert into estado values(8, 'Colima');
+insert into estado values(9, 'Durango');
+insert into estado values(10, 'Estado de México');
+insert into estado values(11, 'Guanajuato');
+insert into estado values(12, 'Guerrero');
+insert into estado values(13, 'Hidalgo');
+insert into estado values(14, 'Jalisco');
+insert into estado values(15, 'Michoacán');
+insert into estado values(16, 'Morelos');
+insert into estado values(17, 'Nayarit');
+insert into estado values(18, 'Nuevo León');
+insert into estado values(19, 'Oaxaca');
+insert into estado values(20, 'Puebla');
+insert into estado values(21, 'Querétaro');
+insert into estado values(22, 'Quintana Roo');
+insert into estado values(23, 'San Luis Potosí');
+insert into estado values(24, 'Sinaloa');
+insert into estado values(25, 'Sonora');
+insert into estado values(26, 'Tabasco');
+insert into estado values(27, 'Tamaulipas');
+insert into estado values(28, 'Tlaxcala');
+insert into estado values(29, 'Veracruz');
+insert into estado values(30, 'Yucatán');
+insert into estado values(31, 'Zacatecas');
